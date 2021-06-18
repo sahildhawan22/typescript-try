@@ -20,7 +20,7 @@ randomValue = true;
 randomValue = "Sahil";
 
 let myVariable: any = 10;
-//won't throw any error in the following statements:
+//won't throw any "COMPILATION" error in the following statements:
 console.log(myVariable.name);
 myVariable();
 myVariable.toUpperCase();

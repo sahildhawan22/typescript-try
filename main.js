@@ -21,7 +21,7 @@ var randomValue = 10;
 randomValue = true;
 randomValue = "Sahil";
 var myVariable = 10;
-//won't throw any error in the following statements:
+//won't throw any COMPILATION error in the following statements:
 console.log(myVariable.name);
 myVariable();
 myVariable.toUpperCase();
