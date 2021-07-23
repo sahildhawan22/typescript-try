@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var message = "Hi TS 👋";
 console.log(message);
 var isBeginner = true;
