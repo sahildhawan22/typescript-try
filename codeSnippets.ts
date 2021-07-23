@@ -38,3 +38,17 @@ function add(num1: number, num2: number, num3: number = 10) : number {
 }
 console.log(`add(1,2,3): ${add(1,2,3)}`);
 console.log(`add(1,2): ${add(1,2)}`);
+
+/* 4. null is Object */
+function printAll(strs: string | string[] | null) {
+    if (typeof strs === "object") {
+      for (const s of strs) {
+  //Object is possibly 'null'.
+        console.log(s);
+      }
+    } else if (typeof strs === "string") {
+      console.log(strs);
+    } else {
+      // do nothing
+    }
+  }

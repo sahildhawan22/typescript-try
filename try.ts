@@ -78,3 +78,17 @@ function padLeft(padding: number | string, input: string) {
     }
 }
 
+function printAll(strs: string | string[] | null) {
+    //if(strs) {
+        if(strs && typeof strs === "object") {
+            for(const s of strs) {
+                console.log(s + " ");
+            }
+        } else if(typeof strs === "string") {
+            strs.toLowerCase();
+            console.log("strs: ", strs);
+        }
+    //}
+}
+
+//printAll([null, null]);
