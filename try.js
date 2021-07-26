@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 // let name = "Kartik Dhawan";
 // let sentence = `My name is ${name}. I'm beginner in TS`;
 // console.log(sentence);
@@ -22,36 +22,33 @@ exports.__esModule = true;
 //     return num1 + num2 + num3;
 // }
 //But this will work:
-function add(num1, num2, num3) {
-    if (num3 === void 0) { num3 = 10; }
+function add(num1, num2, num3 = 10) {
     return num1 + num2 + num3;
 }
-console.log("add(1,2,3): " + add(1, 2, 3));
-console.log("add(1,2): " + add(1, 2));
 function fullName(person) {
-    return person.firstName + " " + person.lastName;
+    return `${person.firstName} ${person.lastName}`;
 }
-var p = {
+let p = {
     firstName: 'Bruce'
 };
-console.log(fullName(p));
-console.log(fullName({
-    firstName: "Sahil"
-}));
+// console.log(fullName(p));
+// console.log(fullName({
+//     firstName: "Sahil"
+//     }));
 function printCoord(pt) {
-    console.log("Point is (" + pt.x + ", " + pt.y + ")");
+    console.log(`Point is (${pt.x}, ${pt.y})`);
 }
-printCoord({ x: 2, y: 4 });
+//printCoord({x: 2, y: 4});
 function welcomePeople(x) {
     if (Array.isArray(x)) {
-        console.log("Welcome " + x.join(', '));
+        console.log(`Welcome ${x.join(', ')}`);
     }
     else {
-        console.log("Welcome lone wolf: " + x);
+        console.log(`Welcome lone wolf: ${x}`);
     }
 }
-welcomePeople('Sahil');
-var sparseArr = new Array(3);
+//welcomePeople('Sahil');
+let sparseArr = new Array(3);
 function padLeft(padding, input) {
     if (typeof padding === "number") {
         return new Array(padding + 1).join(" ") + input;
@@ -63,8 +60,7 @@ function padLeft(padding, input) {
 function printAll(strs) {
     //if(strs) {
     if (strs && typeof strs === "object") {
-        for (var _i = 0, strs_1 = strs; _i < strs_1.length; _i++) {
-            var s = strs_1[_i];
+        for (const s of strs) {
             console.log(s + " ");
         }
     }
@@ -74,4 +70,134 @@ function printAll(strs) {
     }
     //}
 }
-//printAll([null, null]);
+function move(animal) {
+    if ("swim" in animal) {
+        return animal.swim();
+    }
+    return animal.fly();
+}
+const nemo = {
+    swim: function () {
+        console.log("Fish swims");
+    }
+};
+const nigel = {
+    fly: function () {
+        console.log("Bird flies");
+    }
+};
+//type Shape = Circle | Square;
+/* function getArea(shape: Shape) {
+    if(shape.kind === "circle") {
+        return Math.PI * shape.radius ** 2;
+    } else {
+        return shape.sideLength ** 2;
+    }
+} */
+let cir = {
+    kind: "circle",
+    radius: 10
+};
+let sqr = {
+    kind: "square",
+    sideLength: 10
+};
+function greet(fn) {
+    fn("Hello World");
+}
+function doSomething(fn) {
+    fn("Do something");
+    console.log(`fn.Add(2,3): ${fn.fnAddProperty(2, 3)}`);
+    console.log(`fn.desc: ${fn.description}`);
+}
+let fn = Object.assign(function (str) {
+    console.log(str);
+}, {
+    description: "desc",
+    fnAddProperty: (x, y) => x + y
+});
+//doSomething(fn);
+/***************************************/
+/* interface SomeConstructor  {
+    new (s: string): string[];
+}
+type SomeConstructorType = {
+    new (s: string): string[]
+}
+
+function pataNahi(ctor: SomeConstructorType) {
+    return new SomeConstructorType("hello");
+}
+let someConstructorTypeArr =  */
+/***************************************/
+function firstElement(arr) {
+    return arr[0];
+}
+// console.log(firstElement([1,2,3,4]));
+// console.log(firstElement(["a", "b"]));
+/* ************************************* */
+//Generic Types:
+function map(arr, fn) {
+    return arr.map(fn);
+}
+let newArr = map(["1", "2", "3", "4"], (str) => parseInt(str));
+//console.log(newArr);
+/* ************************************* */
+function longest(a, b) {
+    if (a.length > b.length) {
+        return a;
+    }
+    else {
+        return b;
+    }
+}
+// console.log(longest([1,2], [1,2,3]));
+// console.log(longest("alice", "bob"));
+/* ****************************** */
+function combine(a, b) {
+    return a.concat(b);
+}
+//Would give error: let combinedArr = combine([1,2,3], ["hello"]);
+//Solution: let combinedArr = combine<number | string>([1,2,3], ["hello"]);
+class MyClass {
+    constructor() {
+        this.name = "MyClass";
+    }
+    getName() {
+        return this.name;
+    }
+}
+const c = new MyClass();
+const obj = {
+    name: "obj",
+    getName: c.getName,
+};
+// Prints "obj", not "MyClass"
+console.log(obj.getName());
+function visitForBirthday(home) {
+    // We can read and update properties from 'home.resident'.
+    //Is it because we are not changing referecne of object but just changing its properties
+    console.log(`Happy birthday ${home.resident.name}!`);
+    home.resident.age = 10;
+}
+function evict(home) {
+    // But we can't write to the 'resident' property itself on a 'Home'.
+    /* home.resident = {
+   // Cannot assign to 'resident' because it is a read-only property.
+      name: "Victor the Evictor",
+      age: 42,
+    }; */
+    //But can we do this? YES!
+    home.resident.name = "Victor the Evictor",
+        home.resident.age = 42;
+}
+//This won't work:
+function setCity(homeCity) {
+    homeCity.city = "Chandigarh";
+}
+//But these will:
+const home_city = { city: "Chandigarh" };
+//And this will work too:
+function printCity(homeCity = { city: "Mohali" }) {
+    console.log(homeCity.city);
+}

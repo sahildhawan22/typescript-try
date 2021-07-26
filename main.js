@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var message = "Hi TS 👋";
+let message = "Hi TS 👋";
 console.log(message);
-var isBeginner = true;
-var total = 0;
-var name = "Sahil";
-var list1 = [1, 2, 3, 4];
-var list2 = [1, 2, 3, 4, 5];
-var person1 = ["Sahil", 26];
+let isBeginner = true;
+let total = 0;
+let name = "Sahil";
+let list1 = [1, 2, 3, 4];
+let list2 = [1, 2, 3, 4, 5];
+let person1 = ["Sahil", 26];
 var Color;
 (function (Color) {
     Color[Color["Red"] = 5] = "Red";
@@ -15,17 +15,17 @@ var Color;
     Color[Color["Blue"] = 7] = "Blue";
 })(Color || (Color = {}));
 ;
-var c = Color.Green;
-console.log("c: " + c); //logs c: 6
-var randomValue = 10;
+let c = Color.Green;
+console.log(`c: ${c}`); //logs c: 6
+let randomValue = 10;
 randomValue = true;
 randomValue = "Sahil";
-var myVariable = 10;
+let myVariable = 10;
 //won't throw any "COMPILATION" error in the following statements:
 // console.log(myVariable.name);
 // myVariable();
 // myVariable.toUpperCase();
-var myVariable1 = 10;
+let myVariable1 = 10;
 //won't throw any error in the following statements:
 // console.log(myVariable1.name);
 // myVariable1();
@@ -41,14 +41,14 @@ if (hasName(myVariable)) {
 //Union types:
 //1. Supports narrowing down of static type check.
 //2. Support intellisense.
-var multiType;
+let multiType;
 multiType = 10;
 multiType = true;
 //We could have also used any type, but it won't support intellisense.
-var anyType;
+let anyType;
 anyType = 10;
 anyType = true;
 function fullName(person) {
-    console.log(person.firstName + " " + person.lastName);
+    console.log(`${person.firstName} ${person.lastName}`);
 }
 fullName({ firstName: "Pepper", lastName: "Pots" });

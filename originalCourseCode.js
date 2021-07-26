@@ -1,43 +1,29 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-exports.__esModule = true;
-var message = 'Welcome back!';
+Object.defineProperty(exports, "__esModule", { value: true });
+let message = 'Welcome back!';
 console.log(message);
 // Variable Declaration
-var x = 10;
-var y = 20;
-var sum;
-var title = 'Codevolution';
+let x = 10;
+const y = 20;
+let sum;
+const title = 'Codevolution';
 // Basic Variable Types
-var isBeginner = true;
-var total = 0;
-var name = 'Vishwas';
-var sentence = "My name is " + name + "\nI am a beginner in TypeScript";
+let isBeginner = true;
+let total = 0;
+let name = 'Vishwas';
+let sentence = `My name is ${name}
+I am a beginner in TypeScript`;
 console.log(sentence);
 // Sub types
-var n = null;
-var u = undefined;
+let n = null;
+let u = undefined;
 // let isNew: boolean = null;
 // let myName: string = undefined;
 // Array type
-var list1 = [1, 2, 3];
-var list2 = [1, 2, 3];
+let list1 = [1, 2, 3];
+let list2 = [1, 2, 3];
 // Tuple type
-var person1 = ['Chris', 22];
+let person1 = ['Chris', 22];
 // Enum type
 var Color;
 (function (Color) {
@@ -45,32 +31,31 @@ var Color;
     Color[Color["Green"] = 1] = "Green";
     Color[Color["Blue"] = 2] = "Blue";
 })(Color || (Color = {}));
-var c = Color.Green;
+let c = Color.Green;
 console.log(c);
 // Any type
-var randomValue = 10;
+let randomValue = 10;
 randomValue = true;
 randomValue = 'Vishwas';
 // Unknown type
-var myVariable = 10;
+let myVariable = 10;
 console.log(myVariable.name.firstName);
 myVariable();
 myVariable.toUpperCase();
 // Type inference
-var a;
+let a;
 a = 10;
 a = true;
-var b = 10;
+let b = 10;
 // Union Types
-var multiType;
+let multiType;
 multiType = 20;
 multiType = true;
-var anyType;
+let anyType;
 anyType = 20;
 anyType = true;
 // Functions
-function add(num1, num2) {
-    if (num2 === void 0) { num2 = 10; }
+function add(num1, num2 = 10) {
     if (num2)
         return num1 + num2;
     else
@@ -81,34 +66,31 @@ add(5);
 function fullName(person) {
     console.log(person.firstName + ' ' + person.lastName);
 }
-var p = {
+let p = {
     firstName: 'Bruce'
 };
 fullName(p);
 // Classes
-var Employee = /** @class */ (function () {
-    function Employee(name) {
+class Employee {
+    constructor(name) {
         this.employeeName = name;
     }
-    Employee.prototype.greet = function () {
+    greet() {
         console.log('Good morning ' + this.employeeName);
-    };
-    return Employee;
-}());
-var emp1 = new Employee('Vishwas');
+    }
+}
+let emp1 = new Employee('Vishwas');
 console.log(emp1.employeeName);
 emp1.greet();
-var Manager = /** @class */ (function (_super) {
-    __extends(Manager, _super);
-    function Manager(managerName) {
-        return _super.call(this, managerName) || this;
+class Manager extends Employee {
+    constructor(managerName) {
+        super(managerName);
     }
-    Manager.prototype.delegateWork = function () {
+    delegateWork() {
         console.log('Manager delgating tasks' + this.employeeName);
-    };
-    return Manager;
-}(Employee));
-var m1 = new Manager('Bruce');
+    }
+}
+let m1 = new Manager('Bruce');
 m1.delegateWork();
 m1.greet();
 console.log(m1.employeeName);
