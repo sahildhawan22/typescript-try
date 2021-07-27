@@ -274,9 +274,9 @@ interface HomeCity {
 }
 
 //This won't work:
-function setCity(homeCity: HomeCity) {
-    homeCity.city = "Chandigarh"
-}
+// function setCity(homeCity: HomeCity) {
+//     homeCity.city = "Chandigarh"
+// }
 
 //But these will:
 const home_city: HomeCity = { city: "Chandigarh"};
@@ -284,3 +284,49 @@ const home_city: HomeCity = { city: "Chandigarh"};
 function printCity(homeCity: HomeCity = {city: "Mohali"}) {
     console.log(homeCity.city)
 }
+
+interface Box<Type> {
+    contents:  Type
+}
+
+let stringBox: Box<string> = {contents: "This box has string"};
+
+let point = [3, 4] as const;
+
+function distanceFromOrigin([x, y]: readonly [number, number]) {
+  return Math.sqrt(x ** 2 + y ** 2);
+}
+
+distanceFromOrigin(point);
+
+/* ******************************************************** */
+
+function identity<Type>(arg: Type): Type {
+    return arg;
+}
+
+let myIdentity: <Type>(arg: Type) => Type = identity;
+
+interface GenericIdentityFn <Type>{
+    (arg: Type): Type
+}
+let myGenericIdentity: GenericIdentityFn<number> = identity;
+/* *************************************************************** */
+
+interface Lengthwise {
+    length: number;
+  }
+  
+  function loggingIdentity<Type extends Lengthwise>(arg: Type): Type {
+    console.log(arg.length); // Now we know it has a .length property, so no more error
+    return arg;
+  }
+
+  loggingIdentity({length: 5});
+
+/* ************************************************************* */
+//The keyof operator takes an object type and produces a string or numeric literal union of its keys:
+type Point = { x: number; y: number };
+type P = keyof Point;
+
+/* ************************************************************* */

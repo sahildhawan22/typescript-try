@@ -330,5 +330,132 @@ console.log(readonlyPerson.age); // prints '42'
 writablePerson.age++;
 console.log(readonlyPerson.age); // prints '43'
 
+/* ********************************************************************* */
+
+//Read more about index signatures:
+//IMP: An index signature property type must be either ‘string’ or ‘number’.
+//Works:
+interface NumberDictionary {
+  [index: number]: number;
+  length: string;
+  name: string;
+}
+
+//Doesn't work:
+interface StringDictionary {
+  [index: string]: number;
+  length: number;
+  name: string;
+}
+/* ********************************************************************* */
+
+//Extending Interfaces:
+interface Circle {
+  radius: number;
+}
+interface Colorful {
+  color: string
+}
+
+interface ColorfulCircle extends Circle, Colorful {
+  radius: 100,
+  color: "maroon"
+}
+
+//Check Intersection Types (super easy): https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types
+ type ColorfulCircleType = Circle & Colorful;
+
+/* ********************************************************************* */
+//Generic Object types:
+interface Box<Type> {
+  contents:  Type
+}
+
+let stringBox: Box<string> = {contents: "This box has string"};
+
+/* ********************************************************************* */
+// Tuples tend to be created and left un-modified in most code, so annotating types as readonly tuples when possible is a good default.
+function doSomethingTuple(pair: readonly [string, number]) {
+  pair[0] = "hello!";
+//Cannot assign to '0' because it is a read-only property.
+}
+
+// This is also important given that array literals with const assertions will be inferred with readonly tuple types.
+
+let point = [3, 4] as const;
+//Fixing issue in last example. Use readonly as param type:
+function distanceFromOrigin([x, y]: readonly [number, number]) {
+  return Math.sqrt(x ** 2 + y ** 2);
+}
+
+distanceFromOrigin(point);
+
+/* ********************************************************************* */
+//Generic Type for functions and interfaces:https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types
+
+function identity<Type>(arg: Type): Type {
+  return arg;
+}
+
+let myIdentity: <Type>(arg: Type) => Type = identity;
+
+interface GenericIdentityFn{
+  <Type>(arg: Type): Type
+}
+let myGenericIdentity: GenericIdentityFn = identity;
+/* ********************************************************************* */
+// In a similar example, we may want to move the generic parameter to be a parameter of the whole interface. This lets us see what type(s) we’re generic over (e.g. Dictionary<string> rather than just Dictionary). This makes the type parameter visible to all the other members of the interface.
+
+interface GenericIdentityInterfaceFn<Type> {
+  (arg: Type): Type;
+}
+
+function identityInterface<Type>(arg: Type): Type {
+  return arg;
+}
+
+let interfaceIdentity: GenericIdentityInterfaceFn<number> = identityInterface;
+// Notice that our example has changed to be something slightly different. Instead of describing a generic function, we now have a non-generic function signature that is a part of a generic type. When we use GenericIdentityFn, we now will also need to specify the corresponding type argument (here: number), effectively locking in what the underlying call signature will use. Understanding when to put the type parameter directly on the call signature and when to put it on the interface itself will be helpful in describing what aspects of a type are generic.
+/* ********************************************************************* */
+
+//The keyof operator takes an object type and produces a string or numeric literal union of its keys:
+type Point = { x: number; y: number };
+type P = keyof Point;
+
+// If the type has a string or number index signature, keyof will return those types instead:
+
+type Arrayish = { [n: number]: unknown };
+type A = keyof Arrayish; //A type now number
 
 
+type Mapish = { [k: string]: boolean };
+type M = keyof Mapish;
+    
+//Gives- type M = string | number
+
+// Note that in this example, M is string | number — this is because JavaScript object keys are always coerced to a string, so obj[0] is always the same as obj["0"].
+
+/* ************************************************************* */
+//typeof and Return type: 
+//ReturnType<T>: It takes a function type and produces its return type:
+
+type Predicate = (x: unknown) => boolean;
+type K = ReturnType<Predicate>;
+
+function returnTypeUsageFn() {
+  return "use with typeof";
+}
+ type RUsage = ReturnType<typeof returnTypeUsageFn>;
+
+ /* ************************************************************** */
+
+ //Indexed Access Type:
+ type PersonType = { age: number; name: string; alive: boolean };
+ type I1 = PersonType["age" | "name"]; //number | string
+ 
+ 
+ type I2 = PersonType[keyof PersonType]; //string | number | boolean
+
+ 
+ type AliveOrName = "alive" | "name";
+ type I3 = PersonType[AliveOrName]; //string | boolean

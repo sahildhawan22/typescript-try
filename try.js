@@ -192,12 +192,30 @@ function evict(home) {
         home.resident.age = 42;
 }
 //This won't work:
-function setCity(homeCity) {
-    homeCity.city = "Chandigarh";
-}
+// function setCity(homeCity: HomeCity) {
+//     homeCity.city = "Chandigarh"
+// }
 //But these will:
 const home_city = { city: "Chandigarh" };
 //And this will work too:
 function printCity(homeCity = { city: "Mohali" }) {
     console.log(homeCity.city);
 }
+let stringBox = { contents: "This box has string" };
+let point = [3, 4];
+function distanceFromOrigin([x, y]) {
+    return Math.sqrt(x ** 2 + y ** 2);
+}
+distanceFromOrigin(point);
+/* ******************************************************** */
+function identity(arg) {
+    return arg;
+}
+let myIdentity = identity;
+let myGenericIdentity = identity;
+function loggingIdentity(arg) {
+    console.log(arg.length); // Now we know it has a .length property, so no more error
+    return arg;
+}
+loggingIdentity({ length: 5 });
+/* ************************************************************* */
