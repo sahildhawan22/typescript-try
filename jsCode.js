@@ -1,13 +1,12 @@
-function printAll(strs) {
-    if(strs) {
-        if(typeof strs === "object") {
-            for(const s of strs) {
-                console.log(s + " ");
-            }
-        } else if(typeof strs === "string") {
-            console.log(strs);
-        }
+let obj = {
+    toString(){
+      console.log('toString called')
+      return 'Hello'
     }
-}
-
-printAll("")
+  }
+  
+  let foo = {};
+  foo[obj] = 'World'; // toString called
+  console.log(foo[obj]); // toString called, World
+  console.log(foo['Hello']); // World
+  console.log(`foo: ${JSON.stringify(foo)}`)

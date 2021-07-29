@@ -459,3 +459,31 @@ function returnTypeUsageFn() {
  
  type AliveOrName = "alive" | "name";
  type I3 = PersonType[AliveOrName]; //string | boolean
+
+ /* ********************************************************* */
+ //Classes with constructor overload and default values.
+//  Important:
+// With –strictPropertyInitialization in Classes, it is ok if we have initialized the variable while we had declared it, if we are not initializing it in constructor.
+
+// If you make class fields readonly, assign it value while declaring itself OR when in constructor.
+
+class PointClass {
+  x: number;
+  y: number;
+
+  //Constructor with default values
+  constructor(x = 0, y = 0) {
+      this.x = x;
+      this.y = y;
+  }
+}
+
+class PointClassOverload { 
+  
+  constructor(x: number, y: string);
+  constructor(x: string);
+  constructor(xs: any, y?: string) {
+      //Write your implementation here
+      //CONFIRM: Whether in function overload or in class overload, we implement the overload in the most 'general' method?
+  }
+}

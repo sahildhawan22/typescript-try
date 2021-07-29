@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.pageInit = void 0;
 // let name = "Kartik Dhawan";
 // let sentence = `My name is ${name}. I'm beginner in TS`;
 // console.log(sentence);
@@ -219,3 +220,29 @@ function loggingIdentity(arg) {
 }
 loggingIdentity({ length: 5 });
 /* ************************************************************* */
+class PointClass {
+    //Constructor with default values
+    constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
+    }
+}
+class PointClassOverload {
+    constructor(xs, y) {
+        //Write your implementation here
+        //CONFIRM: Whether in function overload or in class overload, we implement the overload in the most 'general' method?
+    }
+}
+const N_1 = require("N");
+function pageInit(context) {
+    let customer = context.currentRecord;
+    /**
+     * TODO
+     */
+    let applyCouponField = customer.getValue({
+        fieldId: "custentity_sdr_apply_coupon"
+    });
+    N_1.log.debug("Title: ", applyCouponField);
+    alert(applyCouponField);
+}
+exports.pageInit = pageInit;

@@ -330,3 +330,26 @@ type Point = { x: number; y: number };
 type P = keyof Point;
 
 /* ************************************************************* */
+
+class PointClass {
+    x: number;
+    y: number;
+
+    //Constructor with default values
+    constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class PointClassOverload { 
+    
+    constructor(x: number, y: string);
+    constructor(x: string);
+    constructor(xs: any, y?: string) {
+        //Write your implementation here
+        //CONFIRM: Whether in function overload or in class overload, we implement the overload in the most 'general' method?
+    }
+}
+
+/* ******************************* */
